@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 
-import { Movie } from '../../common/interface/nowPlaying.interface';
+import { Movie } from '../../common/interface/movies.interface';
 import { styles } from './MoviePoster.style';
 
 interface MoviePosterProps {
