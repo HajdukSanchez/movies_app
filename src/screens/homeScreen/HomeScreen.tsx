@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, ScrollView } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useMovies } from '../../hooks';
-import { Loading, MoviePoster } from '../../components';
+import { Loading, MovieList, MoviePoster } from '../../components';
 import { styles } from './HomeScreen.style';
 
 const HomeScreen = () => {
@@ -14,7 +14,7 @@ const HomeScreen = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <View style={{ ...styles.container, marginTop: top }}>
+    <ScrollView style={{ paddingTop: top }}>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -24,7 +24,11 @@ const HomeScreen = () => {
         ListHeaderComponent={() => <_Separator />}
         ListFooterComponent={() => <_Separator />}
       />
-    </View>
+      <MovieList movies={nowPlayingMovies} title={'On Theater'} />
+      <MovieList movies={nowPlayingMovies} title={'On Theater 2'} />
+      <MovieList movies={nowPlayingMovies} title={'On Theater 3'} />
+      <MovieList movies={nowPlayingMovies} title={'On Theater 4'} withBottom />
+    </ScrollView>
   );
 };
 

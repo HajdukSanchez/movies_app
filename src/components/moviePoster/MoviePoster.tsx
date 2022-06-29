@@ -6,13 +6,15 @@ import { styles } from './MoviePoster.style';
 
 interface MoviePosterProps {
   movie: Movie;
+  size?: 'small' | 'large';
 }
 
-const MoviePoster = ({ movie }: MoviePosterProps) => {
+const MoviePoster = ({ movie, size = 'large' }: MoviePosterProps) => {
   const imageURI = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+  const imageSize = size === 'large' ? styles.large : styles.small;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, imageSize]}>
       <Image source={{ uri: imageURI }} style={styles.image} />
     </View>
   );

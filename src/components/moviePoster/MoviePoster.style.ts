@@ -2,8 +2,6 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    width: 280,
-    height: 420,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -12,6 +10,14 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  large: {
+    width: 280,
+    height: 420,
+  },
+  small: {
+    width: 140,
+    height: 200,
   },
   image: {
     flex: 1,
