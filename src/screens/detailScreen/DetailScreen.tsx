@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { RootStackParamList } from '../../routes';
 import { getImageURI } from '../../common/helpers';
 import { styles } from './DetailScreen.style';
+import { Loading } from '../../components';
+import { useMovieDetails } from '../../hooks';
 
 interface DetailScreenProps extends StackScreenProps<RootStackParamList, 'Detail'> {}
 
@@ -15,8 +17,11 @@ const DetailScreen = ({
     params: { movie },
   },
 }: DetailScreenProps) => {
+  const { isLoading, movieData } = useMovieDetails(movie.id);
   const imageURI = getImageURI(movie.poster_path);
   const { height } = useWindowDimensions();
+
+  if (isLoading) return <Loading />;
 
   return (
     <ScrollView>
@@ -24,10 +29,12 @@ const DetailScreen = ({
         <Image source={{ uri: imageURI }} style={styles.poster} />
       </View>
       <View style={styles.infoContainer}>
-        <Text style={styles.subTitle}>{movie.original_title}</Text>
-        <Text style={styles.title}>{movie.title}</Text>
+        <View>
+          <Text style={styles.subTitle}>{movie.original_title}</Text>
+          <Text style={styles.title}>{movie.title}</Text>
+        </View>
+        <Icon name="star-outline" size={30} />
       </View>
-      <Icon name="star-outline" size={30} />
     </ScrollView>
   );
 };
