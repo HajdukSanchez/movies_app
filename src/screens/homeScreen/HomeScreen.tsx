@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, FlatList } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useMovies } from '../../hooks';
 import { Loading, MoviePoster } from '../../components';
-import { Movie } from '../../common/interface/nowPlaying.interface';
+import { styles } from './HomeScreen.style';
 
 const HomeScreen = () => {
   const { nowPlayingMovies, isLoading } = useMovies();
@@ -14,13 +14,20 @@ const HomeScreen = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <View style={{ marginTop: top }}>
-      {/* {nowPlayingMovies.map((movie: Movie) => (
-        <Text key={movie.id}>{movie.title}</Text>
-      ))} */}
-      <MoviePoster movie={nowPlayingMovies[0]} />
+    <View style={{ ...styles.container, marginTop: top }}>
+      <FlatList
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={nowPlayingMovies}
+        renderItem={({ item }) => <MoviePoster movie={item} />}
+        ItemSeparatorComponent={() => <_Separator />}
+        ListHeaderComponent={() => <_Separator />}
+        ListFooterComponent={() => <_Separator />}
+      />
     </View>
   );
 };
+
+const _Separator = () => <View style={{ marginHorizontal: 10 }} />;
 
 export { HomeScreen };
