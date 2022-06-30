@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useMovies } from '../../hooks';
-import { Loading, MovieList } from '../../components';
+import { GradientBackground, Loading, MovieList } from '../../components';
 
 const HomeScreen = () => {
   const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
@@ -13,12 +13,14 @@ const HomeScreen = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <ScrollView style={{ paddingTop: top }}>
-      <MovieList movies={nowPlaying} largePoster />
-      <MovieList movies={popular} title={'Popular'} />
-      <MovieList movies={topRated} title={'Top Rated'} />
-      <MovieList movies={upcoming} title={'Upcoming'} withBottom />
-    </ScrollView>
+    <GradientBackground>
+      <ScrollView style={{ paddingTop: top }}>
+        <MovieList movies={nowPlaying} largePoster />
+        <MovieList movies={popular} title={'Popular'} />
+        <MovieList movies={topRated} title={'Top Rated'} />
+        <MovieList movies={upcoming} title={'Upcoming'} withBottom />
+      </ScrollView>
+    </GradientBackground>
   );
 };
 
