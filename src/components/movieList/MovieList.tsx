@@ -24,6 +24,7 @@ const MovieList = ({ movies, title, largePoster = false, withBottom = false }: M
         ItemSeparatorComponent={() => <_Separator />}
         ListHeaderComponent={() => <_Separator />}
         ListFooterComponent={() => <_Separator />}
+        snapToInterval={2}
       />
     </View>
   );
