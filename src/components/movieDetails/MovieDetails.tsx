@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -8,6 +8,7 @@ import { MovieDetail } from '../../common/interface/details.interface';
 import { styles } from './MovieDetails.style';
 import { setStarIconByRaiting } from '../../common/helpers/stars/stars.helper';
 import { API_RESPONSE_LANGUAGE } from '@env';
+import { ActorCard } from '../actorCard/ActorCard';
 
 interface MovieDetailsProps {
   movieData: MovieDetail;
@@ -36,8 +37,22 @@ const MovieDetails = ({ movieData, cast }: MovieDetailsProps) => {
           </Text>
         </View>
       </View>
+      <View>
+        <Text style={[styles.title, styles.titleCast]}>Casting</Text>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={cast}
+          renderItem={({ item }) => <ActorCard actor={item} />}
+          ListHeaderComponent={() => <_Separator />}
+          ListFooterComponent={() => <_Separator />}
+          ItemSeparatorComponent={() => <_Separator />}
+        />
+      </View>
     </View>
   );
 };
+
+const _Separator = () => <View style={{ marginHorizontal: 10 }} />;
 
 export { MovieDetails };

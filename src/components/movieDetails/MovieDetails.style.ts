@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { globalStyles } from '../../common/styles/global.style';
 
 export const styles = StyleSheet.create({
   container: {
@@ -6,7 +7,8 @@ export const styles = StyleSheet.create({
     marginBottom: 40,
   },
   informationContainer: {
-    marginHorizontal: 20,
+    ...globalStyles.marginHorizontal,
+    marginBottom: 15,
   },
   raiting: {
     flexDirection: 'row',
@@ -32,5 +34,9 @@ export const styles = StyleSheet.create({
   text: {
     paddingVertical: 5,
     fontSize: 16,
+  },
+  titleCast: {
+    ...globalStyles.marginHorizontal,
+    paddingBottom: 10,
   },
 });

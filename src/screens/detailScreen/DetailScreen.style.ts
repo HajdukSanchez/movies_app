@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   infoContainer: {
-    marginHorizontal: 20,
+    ...globalStyles.marginHorizontal,
     marginTop: 20,
   },
   title: {
