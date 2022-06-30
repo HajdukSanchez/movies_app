@@ -21,4 +21,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     opacity: 0.6,
   },
+  loading: {
+    marginVertical: 20,
+  },
 });

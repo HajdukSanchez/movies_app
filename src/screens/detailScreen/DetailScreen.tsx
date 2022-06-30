@@ -1,14 +1,13 @@
 import React from 'react';
-import { View, Text, Image, useWindowDimensions, ScrollView } from 'react-native';
+import { View, Text, Image, useWindowDimensions, ScrollView, ActivityIndicator } from 'react-native';
 
 import { StackScreenProps } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import { RootStackParamList } from '../../routes';
 import { getImageURI } from '../../common/helpers';
 import { styles } from './DetailScreen.style';
-import { Loading } from '../../components';
 import { useMovieDetails } from '../../hooks';
+import { MovieDetails } from '../../components';
 
 interface DetailScreenProps extends StackScreenProps<RootStackParamList, 'Detail'> {}
 
@@ -17,11 +16,9 @@ const DetailScreen = ({
     params: { movie },
   },
 }: DetailScreenProps) => {
-  const { isLoading, movieData } = useMovieDetails(movie.id);
+  const { isLoading, movieData, credits } = useMovieDetails(movie.id);
   const imageURI = getImageURI(movie.poster_path);
   const { height } = useWindowDimensions();
-
-  if (isLoading) return <Loading />;
 
   return (
     <ScrollView>
@@ -33,8 +30,12 @@ const DetailScreen = ({
           <Text style={styles.subTitle}>{movie.original_title}</Text>
           <Text style={styles.title}>{movie.title}</Text>
         </View>
-        <Icon name="star-outline" size={30} />
       </View>
+      {isLoading ? (
+        <ActivityIndicator size={35} color="red" style={styles.loading} />
+      ) : (
+        <MovieDetails movieData={movieData} cast={credits.cast} />
+      )}
     </ScrollView>
   );
 };
