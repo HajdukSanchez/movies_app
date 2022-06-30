@@ -20,7 +20,7 @@ const MoviePoster = ({ movie, size = 'large' }: MoviePosterProps) => {
   const imageSize = size === 'large' ? styles.large : styles.small;
 
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={() => navigate('Detail', { movie })}>
+    <TouchableOpacity activeOpacity={0.8} onPress={() => navigate('Detail', { movie })} style={{ paddingBottom: 10 }}>
       <View style={[styles.container, imageSize]}>
         <Image source={{ uri: imageURI }} style={styles.image} />
       </View>

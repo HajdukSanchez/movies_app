@@ -24,4 +24,13 @@ export const styles = StyleSheet.create({
   loading: {
     marginVertical: 20,
   },
+  buttonBack: {
+    position: 'absolute',
+    right: 20,
+    padding: 0,
+    borderRadius: 100,
+    backgroundColor: 'white',
+    zIndex: 10,
+    ...globalStyles.shadow,
+  },
 });

@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, Image, useWindowDimensions, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, Image, useWindowDimensions, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 
 import { StackScreenProps } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { RootStackParamList } from '../../routes';
 import { getImageURI } from '../../common/helpers';
@@ -15,13 +17,18 @@ const DetailScreen = ({
   route: {
     params: { movie },
   },
+  navigation: { goBack },
 }: DetailScreenProps) => {
   const { isLoading, movieData, credits } = useMovieDetails(movie.id);
   const imageURI = getImageURI(movie.poster_path);
   const { height } = useWindowDimensions();
+  const { top } = useSafeAreaInsets();
 
   return (
     <ScrollView>
+      <TouchableOpacity onPress={() => goBack()} activeOpacity={0.8} style={{ ...styles.buttonBack, top }}>
+        <Icon name="chevron-back-outline" size={40} color={'black'} />
+      </TouchableOpacity>
       <View style={{ ...styles.posterContainer, height: height * 0.7 }}>
         <Image source={{ uri: imageURI }} style={styles.poster} />
       </View>
